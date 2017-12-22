@@ -1,0 +1,56 @@
+<UserControl x:Class="EnvDteSample.AddFileToolWindowControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
+             xmlns:vsp="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.15.0"
+             mc:Ignorable="d"
+             d:DesignHeight="900" d:DesignWidth="600"
+             Background="{DynamicResource {x:Static vsp:EnvironmentColors.ToolWindowBackgroundBrushKey}}"
+             Foreground="{DynamicResource {x:Static vsp:EnvironmentColors.ToolWindowTextBrushKey}}"
+             Name="MyToolWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <TextBlock Text="プロジェクトにファイルを追加する" Margin="0,2,0,2"/>
+            <ListView x:Name="ProjectList" Margin="10" MinHeight="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Project Name: " />
+                            <Label Content="{Binding Path=Name , Mode=OneWay}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Load Project" Click="LoadButton_Click" Width="80" Height="50" Name="LoadButton" Margin="10"/>
+                <Button Content="Add File" Click="button1_Click" Width="80" Height="50" Name="button1" Margin="10"/>
+                <Button Content="Set Startup Project" Click="StartupProjectButton_Click" Width="120" Height="50" Name="StartupProjectButton" Margin="10"/>
+                <Button Content="Project Reference" Click="AddReferenceButton_Click" Width="120" Height="50" Name="AddReferenceButton" Margin="10"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <TextBlock Text="ファイルをネストさせる" Margin="0,2,0,2"/>
+            <ListView x:Name="ProjectItemList" Margin="10" MinHeight="300">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Project Name: " />
+                            <Label Content="{Binding Path=ProjectName}" />
+                            <Label Content="Item Name: " />
+                            <Label Content="{Binding Path=Name, Mode=OneWay}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Nest File" Click="AddNestFile_Click" Width="80" Height="50" Name="AddNestFile" Margin="10"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
